@@ -1,0 +1,17 @@
+apiVersion: skaffold/v2beta18
+kind: Config
+metadata:
+    name: label-studio
+build:
+    artifacts:
+        - image: label-studio
+          docker:
+              dockerfile: Dockerfile
+deploy:
+    kubectl:
+        manifests:
+            - ./deploy/skaffold/deployment.yaml
+portForward:
+    - resourceType: service
+      resourceName: label-studio-svc
+      port: 8080
