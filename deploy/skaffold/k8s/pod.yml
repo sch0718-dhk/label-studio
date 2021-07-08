@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    namespace: label-studio
+    name: label-studio-test
+    labels:
+        service: label-studio
+        env: dev
+        deployed: skaffold
+spec:
+    volumes:
+        - name: google-cloud-key
+          secret:
+              secretName: label-studio-secret
+    containers:
+        - name: label-studio
+          image: asia.gcr.io/dhk-data-labs/label-studio
+          ports:
+              - name: ls-pod-port
+                containerPort: 8080
+                protocol: TCP
+          envFrom:
+              - configMapRef:
+                    name: label-studio-configmap
+              - secretRef:
+                    name: label-studio-secret
+          volumeMounts:
+              - name: google-cloud-key
+                mountPath: /var/secrets/google

@@ -4,14 +4,14 @@ metadata:
     name: label-studio
 build:
     artifacts:
-        - image: label-studio
+        - image: asia.gcr.io/dhk-data-labs/label-studio
           docker:
               dockerfile: Dockerfile
 deploy:
     kubectl:
         manifests:
-            - ./deploy/skaffold/deployment.yaml
+            - ./deploy/skaffold/k8s/pod.yml
 portForward:
-    - resourceType: service
-      resourceName: label-studio-svc
+    - resourceType: pod
+      resourceName: label-studio-test
       port: 8080
