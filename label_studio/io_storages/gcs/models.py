@@ -98,12 +98,16 @@ class GCSImportStorage(ImportStorage, GCSStorageMixin):
         r = urlparse(url, allow_fragments=False)
         bucket_name = r.netloc
         key = r.path.lstrip('/')
-        if self.is_gce_instance():
-            logger.debug('Generate signed URL for GCE instance')
-            return self.python_cloud_function_get_signed_url(bucket_name, key)
-        else:
-            logger.debug('Generate signed URL for local instance')
-            return self.generate_download_signed_url_v4(bucket_name, key)
+
+        # 정상동작 하지 않는 코드로 인해 버그가 발생
+        # Service Account를 사용하는 라이브러리가 정상동작하지 않아 Key를 사용하는 방식만을 사용
+        return self.generate_download_signed_url_v4(bucket_name, key)
+        # if self.is_gce_instance():
+        #     logger.debug('Generate signed URL for GCE instance')
+        #     return self.python_cloud_function_get_signed_url(bucket_name, key)
+        # else:
+        #     logger.debug('Generate signed URL for local instance')
+        #     return self.generate_download_signed_url_v4(bucket_name, key)
 
     def generate_download_signed_url_v4(self, bucket_name, blob_name):
         """Generates a v4 signed URL for downloading a blob.
