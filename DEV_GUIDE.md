@@ -48,5 +48,9 @@ python label_studio/manage.py runserver
 ### Skaffold로 K8S에서 개발
 
 ```sh
+./skaffold.sh
+```
+
+```sh
 skaffold dev --filename=./deploy/skaffold/skaffold.yaml
 ```
