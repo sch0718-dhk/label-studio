@@ -20,6 +20,10 @@ export GOOGLE_APPLICATION_CREDENTIALS=<gcp_account_key_file_path>
 export LABEL_STUDIO_DISABLE_SIGNUP_WITHOUT_LINK="true"
 export LABEL_STUDIO_USERNAME=<username>
 export LABEL_STUDIO_PASSWORD=<password>
+# 구글 OAuth 관련 환경변수
+export YODA_GOOGLE_OAUTH_ENABLE=true
+export YODA_GOOGLE_CLIENT_ID=<client_id>
+export YODA_GOOGLE_CLIENT_SECRET=<secret>
 ```
 
 ### 초기 설정
