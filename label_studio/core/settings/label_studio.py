@@ -32,3 +32,8 @@ sentry.init_sentry(release_name='label-studio', release_version=__version__)
 # we should do it after sentry init
 from label_studio.core.utils.common import collect_versions
 versions = collect_versions()
+
+# YoDa Customs
+YODA_GOOGLE_OAUTH_ENABLE = get_bool_env('YODA_GOOGLE_OAUTH_ENABLE', False)
+YODA_GOOGLE_CLIENT_ID = get_env('YODA_GOOGLE_CLIENT_ID')
+YODA_GOOGLE_CLIENT_SECRET = get_env('YODA_GOOGLE_CLIENT_SECRET')
