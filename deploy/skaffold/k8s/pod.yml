@@ -14,7 +14,7 @@ spec:
               secretName: label-studio-secret
     containers:
         - name: label-studio
-          image: asia.gcr.io/dhk-data-labs/label-studio
+          image: asia.gcr.io/dhk-data-yoda-dev/label-studio
           ports:
               - name: ls-pod-port
                 containerPort: 8080

@@ -1,1 +1,1 @@
-skaffold dev --filename=./deploy/skaffold/skaffold.yaml --kube-context=gke_dhk-data-labs_asia-northeast3-c_label-studio-test --namespace=label-studio
+skaffold dev --filename=./deploy/skaffold/skaffold.yaml --kube-context=gke_dhk-data-yoda-dev_asia-northeast3_yoda-svc --namespace=label-studio

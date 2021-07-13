@@ -122,6 +122,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    # YoDa Custom
+    'django.contrib.sites',
 
     'drf_yasg',
     'corsheaders',
@@ -145,7 +147,13 @@ INSTALLED_APPS = [
     'tasks',
     'data_manager',
     'io_storages',
-    'ml'
+    'ml',
+
+    # YoDa Custom
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -204,7 +212,11 @@ ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'users.User'
 AUTHENTICATION_BACKENDS = [
     'rules.permissions.ObjectPermissionBackend',
-    'django.contrib.auth.backends.ModelBackend'
+    'django.contrib.auth.backends.ModelBackend',
+
+    # YoDa Custom
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 USE_USERNAME_FOR_LOGIN = False
 
@@ -276,9 +288,9 @@ GRAPHIQL = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 TIME_ZONE = 'UTC'
-USE_I18N = False
+USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 

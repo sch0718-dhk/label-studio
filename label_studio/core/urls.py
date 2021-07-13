@@ -28,6 +28,8 @@ from rest_framework.permissions import AllowAny
 
 from core import views
 
+from django.contrib.auth.views import LogoutView
+
 handler500 = 'core.views.custom_500'
 
 schema_view = get_schema_view(
@@ -80,7 +82,11 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
     path('django-rq/', include('django_rq.urls')),
-    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # YoDa Custom
+    path('accounts/', include('allauth.urls')),
+    path('logout', LogoutView.as_view()),
 ]
 
 if settings.DEBUG:

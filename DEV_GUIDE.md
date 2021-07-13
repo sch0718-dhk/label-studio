@@ -18,12 +18,8 @@ export POSTGRE_HOST=<postgresql_host>
 export GOOGLE_APPLICATION_CREDENTIALS=<gcp_account_key_file_path>
 # 사용자 가입 링크 비 활성화 여부
 export LABEL_STUDIO_DISABLE_SIGNUP_WITHOUT_LINK="true"
-export LABEL_STUDIO_USERNAME=<username>
-export LABEL_STUDIO_PASSWORD=<password>
 # 구글 OAuth 관련 환경변수
 export YODA_GOOGLE_OAUTH_ENABLE=true
-export YODA_GOOGLE_CLIENT_ID=<client_id>
-export YODA_GOOGLE_CLIENT_SECRET=<secret>
 ```
 
 ### 초기 설정
@@ -40,13 +36,35 @@ pip install -e .
 python label_studio/manage.py migrate
 ```
 
+### Django Super User 생성
+
+Label Studio에서 사용하는 Django Framework에는 Admin 기능이 있습니다.
+Admin을 사용하기 위해 Super User를 생성합니다.
+
+```sh
+python label_studio/manage.py createsuperuser
+```
+
+Admin은 http://127.0.0.1:8080/admin 로 접속 가능합니다.
+
 ## 실행
 
 ### Local 실행
 
+#### Back-End
+
 ```sh
 # Start the server in development mode at http://localhost:8080
 python label_studio/manage.py runserver
+```
+
+#### Front-End
+
+frontend 폴더로 이동 후 아래 명령어를 실행하면 Front-End의 소스 변경내용이 바로 반영됩니다.
+브라우저에서 변경 내용이 반영되기 위해서는 캐시 때문에 강제 리로딩이 필요합니다.(MacOS + Chrome 기준 Command + Shift + R)
+
+```sh
+npx webpack --watch
 ```
 
 ### Skaffold로 K8S에서 개발
@@ -55,6 +73,24 @@ python label_studio/manage.py runserver
 ./skaffold.sh
 ```
 
+## Build & Deploy
+
+### Build
+
+> 배포할 때는 먼저 Front-End 를 반드시 빌드 후 배포하여야 합니다.
+> 그렇지 않으면 Front-End에 변경 내용이 있더라도 반영되지 않습니다.
+>
+> ```sh
+> npm ci
+> ```
+
 ```sh
-skaffold dev --filename=./deploy/skaffold/skaffold.yaml
+docker build \
+ -f Dockerfile \
+ -t asia.gcr.io/dhk-data-yoda-dev/label-studio:latest \
+ ./
 ```
+
+### Deploy
+
+TBD

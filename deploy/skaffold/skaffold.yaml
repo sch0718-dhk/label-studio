@@ -4,7 +4,7 @@ metadata:
     name: label-studio
 build:
     artifacts:
-        - image: asia.gcr.io/dhk-data-labs/label-studio
+        - image: asia.gcr.io/dhk-data-yoda-dev/label-studio
           docker:
               dockerfile: Dockerfile
 deploy:

@@ -37,3 +37,28 @@ versions = collect_versions()
 YODA_GOOGLE_OAUTH_ENABLE = get_bool_env('YODA_GOOGLE_OAUTH_ENABLE', False)
 YODA_GOOGLE_CLIENT_ID = get_env('YODA_GOOGLE_CLIENT_ID')
 YODA_GOOGLE_CLIENT_SECRET = get_env('YODA_GOOGLE_CLIENT_SECRET')
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/projects'
+LOGOUT_REDIRECT_URL = '/'
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'APP': {
+            'client_id': YODA_GOOGLE_CLIENT_ID,
+            'secret': YODA_GOOGLE_CLIENT_SECRET,
+            'key': ''
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}

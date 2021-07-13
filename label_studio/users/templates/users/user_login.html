@@ -1,4 +1,4 @@
-{% extends 'users/user_base.html' %} {% block user_content %}
+{% extends 'users/user_base.html' %} {% block user_content %} {% load socialaccount %} {% if not settings.YODA_GOOGLE_OAUTH_ENABLE %}
 <form id="login-form" action="{% url 'user-login' %}{% if next %}?next={{ next }}{% endif %}" method="post">
 	{% csrf_token %}
 	<p><input type="text" class="ls-input" name="email" id="email" placeholder="Email" value="{{ form.data.email }}" /></p>
@@ -8,11 +8,9 @@
 	{% endfor %} {% endif %}
 	<p><button type="submit" aria-label="Log In" class="ls-button ls-button_look_primary">Log in</button></p>
 </form>
-
-{% if settings.YODA_GOOGLE_OAUTH_ENABLE %}
-<hr />
+{% endif %} {% if settings.YODA_GOOGLE_OAUTH_ENABLE %}
 <div class="google_oauth">
-	<a href="">
+	<a href="{% provider_login_url 'google' %}">
 		<img src="/static/images/google_logo.svg" />
 		Login with Google
 	</a>
